@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "846031477499",
+    "project_id": "neighbor-net-1262b",
+    "storage_bucket": "neighbor-net-1262b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:846031477499:android:559a0e17e305d04da52e5e",
+        "android_client_info": {
+          "package_name": "com.example.neighbor_net"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAnXHWUwZqwZGoqLuEH2G2fUE6tW5JQAU0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

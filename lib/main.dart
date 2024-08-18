@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:neighbor_net/auth/auth.dart';
 import 'package:neighbor_net/auth/login_or_register.dart';
 import 'package:neighbor_net/firebase_options.dart';
+import 'package:neighbor_net/pages/forum_page.dart';
 import 'package:neighbor_net/pages/home_page.dart';
 import 'package:neighbor_net/pages/profile_page.dart';
 import 'package:neighbor_net/pages/users_page.dart';
@@ -33,6 +34,7 @@ class MyApp extends StatelessWidget {
         '/home_page':(context) => const HomePage(),
         '/profile_page':(context) => const ProfilePage(),
         '/users_page':(context) => const UsersPage(),
+        '/forum': (context) => const ForumPage(),
       },
     );
   }

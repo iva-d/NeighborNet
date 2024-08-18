@@ -82,6 +82,25 @@ class MyDrawer extends StatelessWidget {
                   },
                 ),
               ),
+
+              //forum
+              Padding(
+                padding: const EdgeInsets.only(left: 25.0),
+                child: ListTile(
+                  leading: Icon(
+                    Icons.forum,
+                    color: Theme.of(context).colorScheme.inversePrimary,
+                  ),
+                  title: const Text("F O R U M"),
+                  onTap: () {
+                    // pop drawer
+                    Navigator.pop(context);
+
+                    // navigate to users page
+                    Navigator.pushNamed(context, '/forum');
+                  },
+                ),
+              ),
             ],
           ),
 

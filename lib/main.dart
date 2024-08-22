@@ -3,8 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:neighbor_net/auth/auth.dart';
 import 'package:neighbor_net/auth/login_or_register.dart';
 import 'package:neighbor_net/firebase_options.dart';
+import 'package:neighbor_net/pages/events_page.dart';
+import 'package:neighbor_net/pages/forum_page.dart';
 import 'package:neighbor_net/pages/home_page.dart';
 import 'package:neighbor_net/pages/profile_page.dart';
+import 'package:neighbor_net/pages/report_issue_page.dart';
 import 'package:neighbor_net/pages/users_page.dart';
 import 'pages/login_page.dart';
 import 'pages/register_page.dart';
@@ -33,6 +36,9 @@ class MyApp extends StatelessWidget {
         '/home_page':(context) => HomePage(),
         '/profile_page':(context) => ProfilePage(),
         '/users_page':(context) => const UsersPage(),
+        '/forum_page':(context) => ForumPage(),
+        '/report_issue_page':(context) => const ReportIssuePage(),
+        '/events_page':(context) => EventsPage(),
       },
     );
   }

@@ -5,8 +5,16 @@ class MyDrawer extends StatelessWidget {
   const MyDrawer({super.key});
 
   // logout user
-  void logout() {
-    FirebaseAuth.instance.signOut();
+  // void logout() {
+  //   FirebaseAuth.instance.signOut();
+  // }
+  Future<void> logout(BuildContext context) async {
+    try {
+      await FirebaseAuth.instance.signOut();
+      Navigator.of(context).pushReplacementNamed('/login_register_page');
+    } catch (e) {
+      print("Logout Error: $e");
+    }
   }
 
   @override
@@ -40,6 +48,8 @@ class MyDrawer extends StatelessWidget {
                   onTap: () {
                     // this is already the home screen so just pop the drawer
                     Navigator.pop(context);
+
+                    Navigator.pushNamed(context, '/home_page');
                   },
                 ),
               ),
@@ -82,6 +92,60 @@ class MyDrawer extends StatelessWidget {
                   },
                 ),
               ),
+
+              Padding(
+                padding: const EdgeInsets.only(left: 25.0),
+                child: ListTile(
+                  leading: Icon(
+                    Icons.forum,
+                    color: Theme.of(context).colorScheme.inversePrimary,
+                  ),
+                  title: const Text("F O R U M"),
+                  onTap: () {
+                    // pop drawer
+                    Navigator.pop(context);
+
+                    // navigate to forum page
+                    Navigator.pushNamed(context, '/forum_page');
+                  },
+                ),
+              ),
+
+              Padding(
+                padding: const EdgeInsets.only(left: 25.0),
+                child: ListTile(
+                  leading: Icon(
+                    Icons.event,
+                    color: Theme.of(context).colorScheme.inversePrimary,
+                  ),
+                  title: const Text("E V E N T S"),
+                  onTap: () {
+                    // pop drawer
+                    Navigator.pop(context);
+
+                    // navigate to events page
+                    Navigator.pushNamed(context, '/events_page');
+                  },
+                ),
+              ),
+
+              Padding(
+                padding: const EdgeInsets.only(left: 25.0),
+                child: ListTile(
+                  leading: Icon(
+                    Icons.report,
+                    color: Theme.of(context).colorScheme.inversePrimary,
+                  ),
+                  title: const Text("R E P O R T  I S S U E"),
+                  onTap: () {
+                    // pop drawer
+                    Navigator.pop(context);
+
+                    // navigate to forum page
+                    Navigator.pushNamed(context, '/report_issue_page');
+                  },
+                ),
+              ),
             ],
           ),
 
@@ -99,7 +163,7 @@ class MyDrawer extends StatelessWidget {
                 Navigator.pop(context);
 
                 // logout
-                logout();
+                logout(context);
               },
             ),
           ),

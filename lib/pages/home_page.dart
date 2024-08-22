@@ -1,113 +1,123 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:neighbor_net/components/my_drawer.dart';
-import 'package:neighbor_net/components/my_list_tile.dart';
-import 'package:neighbor_net/components/my_post_button.dart';
-import 'package:neighbor_net/components/my_textfield.dart';
-import 'package:neighbor_net/database/firestore.dart';
 
 class HomePage extends StatelessWidget {
-  HomePage({super.key});
-
-  // firestore access
-  final FirestoreDatabase database = FirestoreDatabase();
-
-  // text controller
-  final TextEditingController newPostController = TextEditingController();
-
-  // post message
-  void postMessage() {
-    // only post message if there is something in the textfield
-    if(newPostController.text.isNotEmpty) {
-      String message = newPostController.text;
-      database.addPost(message);
-    }
-
-    // clear the controller
-    newPostController.clear();
-  }
+  const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
-        title: const Text("W A L L"),
+        title: const Text("H O M E"),
         backgroundColor: Colors.transparent,
-        foregroundColor: Theme.of(context).colorScheme.inversePrimary,
         elevation: 0,
       ),
       drawer: const MyDrawer(),
-      body: Column(
-        children: [
-          // textfiels box for user to type
-          Padding(
-            padding: const EdgeInsets.all(25.0),
-            child: Row(
-              children: [
-                // textfield
-                Expanded(
-                  child: MyTextField(
-                      hintText: "Say something...",
-                      obscureText: false,
-                      controller: newPostController
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(height: 20),
+              Text(
+                "Welcome to NeighborNet!",
+                style: Theme.of(context).textTheme.headline5,
+              ),
+              const SizedBox(height: 20),
+
+              Card(
+                margin: const EdgeInsets.symmetric(vertical: 10),
+                elevation: 5,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: InkWell(
+                  onTap: () {
+                    Navigator.pushNamed(context, '/forum_page');
+                  },
+                  child: const Padding(
+                    padding: EdgeInsets.all(20.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "🗣️ See New Discussions",
+                          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(height: 10),
+                        Text(
+                          "Join the conversation and see what's new in the forum.",
+                          style: TextStyle(fontSize: 16),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
+              ),
 
-                // post button
-                PostButton(
-                    onTap: postMessage,
-                )
-              ],
-            ),
-          ),
-
-          // posts
-          StreamBuilder(
-              stream: database.getPostsStream(),
-              builder: (context, snapshot) {
-                // show loading circle
-                if(snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }
-
-                // get all posts
-                final posts = snapshot.data!.docs;
-
-                // no data ?
-                if(snapshot.data == null || posts.isEmpty) {
-                  return const Center(
-                    child: Padding(
-                        padding: EdgeInsets.all(25),
-                        child: Text("No posts... Post something!"),
+              Card(
+                margin: const EdgeInsets.symmetric(vertical: 10),
+                elevation: 5,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: InkWell(
+                  onTap: () {
+                    Navigator.pushNamed(context, '/report_issue_page');
+                  },
+                  child: const Padding(
+                    padding: EdgeInsets.all(20.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "🚨 Having Problems? Report an Issue",
+                          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(height: 10),
+                        Text(
+                          "Let us know about any issues you're facing.",
+                          style: TextStyle(fontSize: 16),
+                        ),
+                      ],
                     ),
-                  );
-                }
+                  ),
+                ),
+              ),
 
-                // return as a list
-                return Expanded(
-                    child: ListView.builder(
-                        itemCount: posts.length,
-                        itemBuilder: (context, index) {
-                          // get each individual post
-                          final post = posts[index];
-
-                          // get data from each post
-                          String message = post['PostMessage'];
-                          String userEmail = post['UserEmail'];
-                          Timestamp timeStamp = post['TimeStamp'];
-
-                          // return as a list tile
-                          return MyListTile(title: message, subtitle: userEmail);
-                        }
-                    )
-                );
-              },
-          )
-        ],
+              Card(
+                margin: const EdgeInsets.symmetric(vertical: 10),
+                elevation: 5,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: InkWell(
+                  onTap: () {
+                    Navigator.pushNamed(context, '/events_page');
+                  },
+                  child: const Padding(
+                    padding: EdgeInsets.all(20.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "🎉 Don't Miss These Events",
+                          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(height: 10),
+                        Text(
+                          "Check out the upcoming events in your neighborhood.",
+                          style: TextStyle(fontSize: 16),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

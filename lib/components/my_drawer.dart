@@ -141,8 +141,26 @@ class MyDrawer extends StatelessWidget {
                     // pop drawer
                     Navigator.pop(context);
 
-                    // navigate to forum page
+                    // navigate to report issue page
                     Navigator.pushNamed(context, '/report_issue_page');
+                  },
+                ),
+              ),
+
+              Padding(
+                padding: const EdgeInsets.only(left: 25.0),
+                child: ListTile(
+                  leading: Icon(
+                    Icons.nature_people,
+                    color: Theme.of(context).colorScheme.inversePrimary,
+                  ),
+                  title: const Text("N E I G H B O R H O O D"),
+                  onTap: () {
+                    // pop drawer
+                    Navigator.pop(context);
+
+                    // navigate to neighborhood page
+                    Navigator.pushNamed(context, '/neighborhood_page');
                   },
                 ),
               ),

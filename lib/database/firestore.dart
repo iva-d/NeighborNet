@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+import '../models/issue.dart';
+
 class FirestoreDatabase {
   // current logged in user
   User? user = FirebaseAuth.instance.currentUser;
@@ -10,6 +12,9 @@ class FirestoreDatabase {
 
   // get collection of events from firebase
   final CollectionReference events = FirebaseFirestore.instance.collection('Events');
+
+  // get collection of issues from firebase
+  final CollectionReference issues = FirebaseFirestore.instance.collection('Issues');
 
   // post a message (on wall)
   Future<void> addPost(String message) {
@@ -67,6 +72,25 @@ class FirestoreDatabase {
     return events
         .orderBy('EventDate')
         .snapshots();
+  }
+
+  // add issue
+  Future<void> addIssue(String title, String description) {
+    return issues.add({
+      'Title': title,
+      'Description': description,
+      'Timestamp': Timestamp.now(),
+    });
+  }
+
+  // read issues from database
+  Stream<List<Issue>> getIssuesStream() {
+    return issues
+        .orderBy('Timestamp', descending: true)
+        .snapshots()
+        .map((snapshot) {
+      return snapshot.docs.map((doc) => Issue.fromDocument(doc)).toList();
+    });
   }
 
 }

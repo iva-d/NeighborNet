@@ -49,8 +49,7 @@ class HomePage extends StatelessWidget {
                         Text(
                           "Join the conversation and see what's new in the forum.",
                           style: TextStyle(fontSize: 16),
-                        ),
-                      ],
+                        ),],
                     ),
                   ),
                 ),
@@ -109,13 +108,40 @@ class HomePage extends StatelessWidget {
                         Text(
                           "Check out the upcoming events in your neighborhood.",
                           style: TextStyle(fontSize: 16),
-                        ),
-                      ],
+                        ),],
                     ),
                   ),
                 ),
               ),
-            ],
+
+              Card(
+                margin: const EdgeInsets.symmetric(vertical: 10),
+                elevation: 5,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: InkWell(
+                  onTap: () {
+                    Navigator.pushNamed(context, '/neighborhood_page');
+                  },
+                  child: const Padding(
+                    padding: EdgeInsets.all(20.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "📍 Your Neighborhood",
+                          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(height: 10),
+                        Text(
+                          "Explore your surroundings and discover nearby parks, stores, and landmarks.",
+                          style: TextStyle(fontSize: 16),
+                        ),],
+                    ),
+                  ),
+                ),
+              ),],
           ),
         ),
       ),

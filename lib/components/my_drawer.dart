@@ -164,6 +164,24 @@ class MyDrawer extends StatelessWidget {
                   },
                 ),
               ),
+
+              Padding(
+                padding: const EdgeInsets.only(left: 25.0),
+                child: ListTile(
+                  leading: Icon(
+                    Icons.camera_alt_outlined,
+                    color: Theme.of(context).colorScheme.inversePrimary,
+                  ),
+                  title: const Text("C A M E R A"),
+                  onTap: () {
+                    // pop drawer
+                    Navigator.pop(context);
+
+                    // navigate to camera page
+                    Navigator.pushNamed(context, '/camera_page');
+                  },
+                ),
+              ),
             ],
           ),
 

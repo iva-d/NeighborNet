@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:neighbor_net/auth/auth.dart';
 import 'package:neighbor_net/auth/login_or_register.dart';
 import 'package:neighbor_net/firebase_options.dart';
+import 'package:neighbor_net/pages/camera_page.dart';
 import 'package:neighbor_net/pages/events_page.dart';
 import 'package:neighbor_net/pages/forum_page.dart';
 import 'package:neighbor_net/pages/home_page.dart';
@@ -41,6 +42,7 @@ class MyApp extends StatelessWidget {
         '/report_issue_page':(context) => const ReportIssuePage(),
         '/events_page':(context) => EventsPage(),
         '/neighborhood_page':(context) => NeighborhoodPage(),
+        '/camera_page':(context) => CameraPage(),
       },
     );
   }

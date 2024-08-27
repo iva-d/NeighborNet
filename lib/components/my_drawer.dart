@@ -82,7 +82,7 @@ class MyDrawer extends StatelessWidget {
                     Icons.group,
                     color: Theme.of(context).colorScheme.inversePrimary,
                   ),
-                  title: const Text("U S E R S"),
+                  title: const Text("N E I G H B O R S"),
                   onTap: () {
                     // pop drawer
                     Navigator.pop(context);
@@ -170,9 +170,12 @@ class MyDrawer extends StatelessWidget {
                 child: ListTile(
                   leading: Icon(
                     Icons.camera_alt_outlined,
-                    color: Theme.of(context).colorScheme.inversePrimary,
+                    color: Colors.grey,
                   ),
-                  title: const Text("C A M E R A"),
+                  title: const Text(
+                      "TEST CAMERA",
+                    style: TextStyle(color: Colors.grey),
+                  ),
                   onTap: () {
                     // pop drawer
                     Navigator.pop(context);

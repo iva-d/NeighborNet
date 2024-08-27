@@ -5,6 +5,8 @@ import 'package:neighbor_net/components/my_button.dart';
 import 'package:neighbor_net/components/my_textfield.dart';
 import 'package:neighbor_net/helper/helper_functions.dart';
 
+import 'login_page.dart';
+
 class RegisterPage extends StatefulWidget {
   final void Function()? onTap;
 
@@ -27,37 +29,46 @@ class _RegisterPageState extends State<RegisterPage> {
   final TextEditingController confirmPwController = TextEditingController();
 
   // register method
-  void registerUser() async{
+  void registerUser() async {
     // show loading circle
     showDialog(
-        context: context,
-        builder: (context) => const Center(
-          child: CircularProgressIndicator(),
-        ),
+      context: context,
+      builder: (context) => const Center(
+        child: CircularProgressIndicator(),
+      ),
     );
 
     // make sure passwords match
-    if(passwordController.text != confirmPwController.text) {
+    if (passwordController.text != confirmPwController.text) {
       // pop loading circle
       Navigator.pop(context);
 
       // show error message to user
       displayMessageToUser("Passwords do not match!", context);
-    }
-    else { // if passwords do match
-      // try creating the user
+    } else {
+      // if passwords do match
       try {
         // create the user
-        UserCredential? userCredential =
-          await FirebaseAuth.instance.createUserWithEmailAndPassword(
-              email: emailController.text, password: passwordController.text
-          );
+        UserCredential? userCredential = await FirebaseAuth.instance
+            .createUserWithEmailAndPassword(
+            email: emailController.text, password: passwordController.text);
 
-        // create a user document and add to firestore
-        createUserDocument(userCredential);
+        // create a user document and add to Firestore
+        await createUserDocument(userCredential);
 
         // pop loading circle
-        if(context.mounted) Navigator.pop(context);
+        if (context.mounted) Navigator.pop(context);
+
+        // clear the text fields
+        emailController.clear();
+        passwordController.clear();
+        confirmPwController.clear();
+        usernameController.clear();
+
+        // redirect to login page
+        if (widget.onTap != null) {
+          widget.onTap!();
+        }
       } on FirebaseAuthException catch (e) {
         // pop loading circle
         Navigator.pop(context);
@@ -67,6 +78,8 @@ class _RegisterPageState extends State<RegisterPage> {
       }
     }
   }
+
+
 
   // create a user document and collect them in firestore
   Future<void> createUserDocument(UserCredential? userCredential) async {
@@ -86,7 +99,7 @@ class _RegisterPageState extends State<RegisterPage> {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       body: Center(
-        child: Padding(
+        child: SingleChildScrollView(
           padding: const EdgeInsets.all(25.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

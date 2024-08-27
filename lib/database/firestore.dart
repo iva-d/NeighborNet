@@ -93,4 +93,14 @@ class FirestoreDatabase {
     });
   }
 
+  // add issue with image
+  Future<void> addIssueWithImage(String title, String description, String imageUrl) {
+    return issues.add({
+      'Title': title,
+      'Description': description,
+      'ImageUrl': imageUrl,
+      'Timestamp': Timestamp.now(),
+    });
+  }
+
 }
